@@ -1,7 +1,7 @@
 #import <SSHKitCore/SSHKitCoreCommon.h>
 
 @protocol SSHKitSessionDelegate, SSHKitChannelDelegate, SSHKitShellChannelDelegate;
-@class SSHKitHostKeyParser, SSHKitRemoteForwardRequest, SSHKitPrivateKeyParser;
+@class SSHKitHostKey, SSHKitRemoteForwardRequest, SSHKitPrivateKey;
 @class SSHKitChannel, SSHKitDirectChannel, SSHKitForwardChannel, SSHKitShellChannel;
 
 typedef void (^ SSHKitCoreLogHandler)(NSString *fmt, ...);
@@ -175,7 +175,7 @@ typedef void (^ SSHKitCoreLogHandler)(NSString *fmt, ...);
  @param privateKeyPath Filepath to private key
  @param passphraseHandler Password handle for encrypted private key
  */
-- (void)authenticateByPrivateKeyParser:(SSHKitPrivateKeyParser *)parser;
+- (void)authenticateByPrivateKey:(SSHKitPrivateKey *)parser;
 - (void)authenticateByPrivateKeyBase64:(NSString *)base64;
 
 /**
@@ -229,7 +229,7 @@ typedef void (^ SSHKitCoreLogHandler)(NSString *fmt, ...);
  @param fingerprint The host's fingerprint
  @returns YES if the session should trust the host, otherwise NO.
  */
-- (BOOL)session:(SSHKitSession *)session shouldConnectWithHostKey:(SSHKitHostKeyParser *)hostKey;
+- (BOOL)session:(SSHKitSession *)session shouldConnectWithHostKey:(SSHKitHostKey *)hostKey;
 - (NSError *)session:(SSHKitSession *)session authenticateWithAllowedMethods:(NSArray *)methods partialSuccess:(BOOL)partialSuccess;
 - (void)session:(SSHKitSession *)session didAuthenticateUser:(NSString *)username;
 

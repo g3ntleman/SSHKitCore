@@ -1,22 +1,22 @@
 //
-//  SSHKitHostKeyParser.m
+//  SSHKitHostKey.m
 //  SSHKitCore
 //
 //  Created by Yang Yubo on 12/24/14.
 //
 //
 
-#import "SSHKitHostKeyParser.h"
+#import "SSHKitHostKey.h"
 #import "SSHKitCore+Protected.h"
 
-@implementation SSHKitHostKeyParser
+@implementation SSHKitHostKey
 
-+ (instancetype)parserFromSession:(SSHKitSession *)session error:(NSError **)errPtr
++ (instancetype)hostKeyFromSession:(SSHKitSession *)session error:(NSError **)errPtr
 {
     // --------------------------------------------------
     // get host key from session
     // --------------------------------------------------
-    SSHKitHostKeyParser *parser = [[SSHKitHostKeyParser alloc] init];
+    SSHKitHostKey *parser = [[SSHKitHostKey alloc] init];
     if (!parser) {
         return nil;
     }
@@ -67,9 +67,9 @@
     return parser;
 }
 
-+ (instancetype)parserFromBase64:(NSString *)base64 withType:(NSInteger)type error:(NSError **)errPtr
++ (instancetype)hostKeyFromBase64:(NSString *)base64 withType:(NSInteger)type error:(NSError **)errPtr
 {
-    SSHKitHostKeyParser *parser = [[SSHKitHostKeyParser alloc] init];
+    SSHKitHostKey *parser = [[SSHKitHostKey alloc] init];
     if (!parser) {
         return nil;
     }

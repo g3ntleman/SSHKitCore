@@ -1,27 +1,27 @@
 //
-//  SSHKitPrivateKeyParser.m
+//  SSHKitPrivateKey.m
 //  SSHKitCore
 //
 //  Created by Yang Yubo on 12/24/14.
 //
 //
 #import "SSHKitCore+Protected.h"
-#import "SSHKitPrivateKeyParser.h"
+#import "SSHKitPrivateKey.h"
 
-@implementation SSHKitPrivateKeyParser
+@implementation SSHKitPrivateKey
 
-+ (instancetype)parserFromFilePath:(NSString *)path withPassphraseHandler:(SSHKitAskPassphrasePrivateKeyBlock)passphraseHandler error:(NSError **)errPtr
++ (instancetype)keyFromFilePath:(NSString *)path withPassphraseHandler:(SSHKitAskPassphrasePrivateKeyBlock)passphraseHandler error:(NSError **)errPtr
 {
-    return [self parserFromContent:path isBase64:NO withPassphraseHandler:passphraseHandler error:errPtr];
+    return [self keyFromContent:path isBase64:NO withPassphraseHandler:passphraseHandler error:errPtr];
 }
 
-+ (instancetype)parserFromBase64:(NSString *)base64 withPassphraseHandler:(SSHKitAskPassphrasePrivateKeyBlock)passphraseHandler error:(NSError **)errPtr
++ (instancetype)keyFromBase64:(NSString *)base64 withPassphraseHandler:(SSHKitAskPassphrasePrivateKeyBlock)passphraseHandler error:(NSError **)errPtr
 {
-    return [self parserFromContent:base64 isBase64:YES withPassphraseHandler:passphraseHandler error:errPtr];
+    return [self keyFromContent:base64 isBase64:YES withPassphraseHandler:passphraseHandler error:errPtr];
 }
 
 
-+ (instancetype)parserFromContent:(NSString *)content isBase64:(BOOL)isBase64 withPassphraseHandler:(SSHKitAskPassphrasePrivateKeyBlock)passphraseHandler error:(NSError **)errPtr
++ (instancetype)keyFromContent:(NSString *)content isBase64:(BOOL)isBase64 withPassphraseHandler:(SSHKitAskPassphrasePrivateKeyBlock)passphraseHandler error:(NSError **)errPtr
 {
     if (!content.length) {
         if (errPtr) *errPtr = [NSError errorWithDomain:SSHKitCoreErrorDomain
@@ -31,7 +31,7 @@
     }
     
     int ret = 0;
-    SSHKitPrivateKeyParser *parser = [[SSHKitPrivateKeyParser alloc] init];
+    SSHKitPrivateKey *parser = [[SSHKitPrivateKey alloc] init];
     
     // import private key
     if (isBase64) {

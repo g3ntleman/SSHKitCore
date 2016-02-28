@@ -5,7 +5,7 @@
 #import <libssh/server.h>
 #import "SSHKitConnector.h"
 #import "SSHKitSession+Channels.h"
-#import "SSHKitPrivateKeyParser.h"
+#import "SSHKitPrivateKey.h"
 #import "SSHKitForwardChannel.h"
 
 #define SOCKET_NULL -1
@@ -192,7 +192,7 @@ typedef NS_ENUM(NSInteger, SSHKitSessionStage) {
             
             // check host key
             NSError *error = nil;
-            SSHKitHostKeyParser *hostKey = [SSHKitHostKeyParser parserFromSession:self error:&error];
+            SSHKitHostKey *hostKey = [SSHKitHostKey hostKeyFromSession:self error:&error];
             
             if ( !error && ! (_delegateFlags.shouldConnectWithHostKey && [self.delegate session:self shouldConnectWithHostKey:hostKey]) )
             {
@@ -735,14 +735,14 @@ typedef NS_ENUM(NSInteger, SSHKitSessionStage) {
 }
 
 - (void)authenticateByPrivateKeyBase64:(NSString *)base64 {
-    SSHKitPrivateKeyParser *parser = [SSHKitPrivateKeyParser parserFromBase64:base64 withPassphraseHandler:NULL error:nil];
+    SSHKitPrivateKey *parser = [SSHKitPrivateKey keyFromBase64:base64 withPassphraseHandler:NULL error:nil];
     if (parser) {
-        [self authenticateByPrivateKeyParser:parser];
+        [self authenticateByPrivateKey:parser];
     }
     
 }
 
-- (void)authenticateByPrivateKeyParser:(SSHKitPrivateKeyParser *)parser {
+- (void)authenticateByPrivateKey:(SSHKitPrivateKey *)parser {
     self.stage = SSHKitSessionStageAuthenticating;
     
     __block BOOL publicKeySuccess = NO;
