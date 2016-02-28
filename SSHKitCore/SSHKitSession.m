@@ -5,7 +5,7 @@
 #import <libssh/server.h>
 #import "SSHKitConnector.h"
 #import "SSHKitSession+Channels.h"
-#import "SSHKitPrivateKey.h"
+#import "SSHKitKeyPair.h"
 #import "SSHKitForwardChannel.h"
 
 #define SOCKET_NULL -1
@@ -735,14 +735,14 @@ typedef NS_ENUM(NSInteger, SSHKitSessionStage) {
 }
 
 - (void)authenticateByPrivateKeyBase64:(NSString *)base64 {
-    SSHKitPrivateKey *parser = [SSHKitPrivateKey keyFromBase64:base64 withPassphraseHandler:NULL error:nil];
+    SSHKitKeyPair *parser = [SSHKitKeyPair keyFromBase64:base64 withPassphraseHandler:NULL error:nil];
     if (parser) {
         [self authenticateByPrivateKey:parser];
     }
     
 }
 
-- (void)authenticateByPrivateKey:(SSHKitPrivateKey *)parser {
+- (void)authenticateByPrivateKey:(SSHKitKeyPair *)parser {
     self.stage = SSHKitSessionStageAuthenticating;
     
     __block BOOL publicKeySuccess = NO;

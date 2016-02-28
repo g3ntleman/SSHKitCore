@@ -5,7 +5,7 @@
 #import <libssh/libssh.h>
 #import "SSHKitSession.h"
 #import "SSHKitChannel.h"
-#import "SSHKitPrivateKey.h"
+#import "SSHKitKeyPair.h"
 #import "SSHKitHostKey.h"
 
 NSString * SSHKitGetBase64FromHostKey(ssh_key key);
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, SSHKitChannelDataType) {
 
 @end
 
-@interface SSHKitPrivateKey () {
+@interface SSHKitKeyPair () {
     SSHKitAskPassphrasePrivateKeyBlock _passhpraseHandler;
 }
 

@@ -1,7 +1,7 @@
 #import <SSHKitCore/SSHKitCoreCommon.h>
 
 @protocol SSHKitSessionDelegate, SSHKitChannelDelegate, SSHKitShellChannelDelegate;
-@class SSHKitHostKey, SSHKitRemoteForwardRequest, SSHKitPrivateKey;
+@class SSHKitHostKey, SSHKitRemoteForwardRequest, SSHKitKeyPair;
 @class SSHKitChannel, SSHKitDirectChannel, SSHKitForwardChannel, SSHKitShellChannel;
 
 typedef void (^ SSHKitCoreLogHandler)(NSString *fmt, ...);
@@ -175,7 +175,7 @@ typedef void (^ SSHKitCoreLogHandler)(NSString *fmt, ...);
  @param privateKeyPath Filepath to private key
  @param passphraseHandler Password handle for encrypted private key
  */
-- (void)authenticateByPrivateKey:(SSHKitPrivateKey *)parser;
+- (void)authenticateByPrivateKey:(SSHKitKeyPair *)parser;
 - (void)authenticateByPrivateKeyBase64:(NSString *)base64;
 
 /**
