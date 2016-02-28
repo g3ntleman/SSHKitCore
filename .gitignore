@@ -26,3 +26,4 @@ DerivedData
 # Pods/
 *.log
 openssl
+.DS_Store
